@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#4F46E5" />
+  <meta name="description" content="ManKart — Find nearby shops, book professionals, schedule repairs, and order from the marketplace. Your city, your services, one app." />
+  <meta name="keywords" content="ManKart, shop nearby, book professional, electrician, plumber, marketplace, local delivery, repair service" />
+  <meta name="author" content="ManKart" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="ManKart — Your City. Your Services. One App." />
+  <meta property="og:description" content="Find nearby shops, book professionals, get repairs done, and order from the marketplace." />
+  <meta property="og:type" content="website" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ManKart" />
+
+  <title>ManKart — Your City. Your Services. One App.</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TOP NAVIGATION
+═══════════════════════════════════════════════════════════ -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#home" onclick="scrollToSection('home')">
+      <div class="nav-logo-icon">🛒</div>
+      <span class="nav-logo-text">ManKart</span>
+    </a>
+
+    <div class="nav-links">
+      <button class="nav-link active" data-section="home" onclick="scrollToSection('home')">Home</button>
+      <button class="nav-link" data-section="shop-nearby" onclick="scrollToSection('shop-nearby')">Shop Nearby</button>
+      <button class="nav-link" data-section="book-professional" onclick="scrollToSection('book-professional')">Book Pro</button>
+      <button class="nav-link" data-section="repair-install" onclick="scrollToSection('repair-install')">Repair & Install</button>
+      <button class="nav-link" data-section="marketplace" onclick="scrollToSection('marketplace')">Marketplace</button>
+    </div>
+
+    <div class="nav-actions">
+      <div class="nav-location">
+        📍 <span id="user-city">Your City</span>
+      </div>
+      <button class="cart-btn" id="open-cart-btn" onclick="openCart()" aria-label="Open cart">
+        🛒
+        <span class="cart-count" id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BOTTOM NAV (Mobile)
+═══════════════════════════════════════════════════════════ -->
+<nav id="bottom-nav" role="navigation" aria-label="Mobile navigation">
+  <div class="bottom-nav-inner">
+    <button class="bottom-nav-item active" data-section="home" onclick="scrollToSection('home')">
+      <span class="icon">🏠</span>
+      <span>Home</span>
+    </button>
+    <button class="bottom-nav-item" data-section="shop-nearby" onclick="scrollToSection('shop-nearby')">
+      <span class="icon">🏪</span>
+      <span>Shops</span>
+    </button>
+    <button class="bottom-nav-item" data-section="book-professional" onclick="scrollToSection('book-professional')">
+      <span class="icon">👷</span>
+      <span>Book Pro</span>
+    </button>
+    <button class="bottom-nav-item" data-section="repair-install" onclick="scrollToSection('repair-install')">
+      <span class="icon">🔧</span>
+      <span>Repair</span>
+    </button>
+    <button class="bottom-nav-item" data-section="marketplace" onclick="scrollToSection('marketplace')">
+      <span class="icon">🛍️</span>
+      <span>Market</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="home" aria-label="ManKart Home">
+  <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">🚀 India's Hyperlocal Super App</div>
+      <h1 class="hero-title">
+        Your City.<br />
+        Your Services.<br />
+        <span class="text-gradient">One App.</span>
+      </h1>
+      <p class="hero-desc">
+        Find shops around you, hire verified professionals, book repair services,
+        and order from our marketplace — all in one place. Fast, reliable, and built for your neighbourhood.
+      </p>
+
+      <div class="hero-location-bar">
+        <input type="text" id="hero-city-input" placeholder="🏙️ Enter your city or area..." aria-label="Enter your city" />
+        <button onclick="setCity()">Explore →</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number" data-target="500" data-suffix="+">0</div>
+          <div class="stat-label">Nearby Shops</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="200" data-suffix="+">0</div>
+          <div class="stat-label">Verified Pros</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="10000" data-suffix="+">0</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right" aria-hidden="true">
+      <div class="hero-cards-stack">
+        <div class="floating-card fc-1">
+          <div class="fc-header">
+            <span class="fc-icon">🌸</span>
+            <div>
+              <div class="fc-title">Green Thumb Nursery</div>
+              <div class="fc-sub">⭐ 4.8 · 0.4 km · 🟢 Open</div>
+            </div>
+          </div>
+          <div class="fc-tags">
+            <span class="fc-tag">Indoor Plants</span>
+            <span class="fc-tag">Bouquets</span>
+            <span class="fc-tag">Pots</span>
+          </div>
+        </div>
+        <div class="floating-card fc-2">
+          <div class="fc-header">
+            <span class="fc-icon">⚡</span>
+            <div>
+              <div class="fc-title">Rajesh Kumar</div>
+              <div class="fc-sub">Electrician · ✅ Verified · ₹350/hr</div>
+            </div>
+          </div>
+          <div class="fc-tags">
+            <span class="fc-tag">Wiring</span>
+            <span class="fc-tag">Fan Install</span>
+            <span class="fc-tag">MCB Panel</span>
+          </div>
+        </div>
+        <div class="floating-card fc-3">
+          <div class="fc-header">
+            <span class="fc-icon">⚡</span>
+            <div>
+              <div class="fc-title">Marketplace Delivery</div>
+              <div class="fc-sub">🍌 Bananas · 🥛 Milk · 🥦 Veggies</div>
+            </div>
+          </div>
+          <div class="fc-tags">
+            <span class="fc-tag">15 min delivery</span>
+            <span class="fc-tag">₹49 onwards</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature Cards -->
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-card fade-in" onclick="scrollToSection('shop-nearby')" id="feat-shop">
+        <span class="feature-card-arrow">↗</span>
+        <div class="feature-card-icon">🏪</div>
+        <div class="feature-card-title">Shop Nearby</div>
+        <div class="feature-card-desc">Discover local shops around you — from flower nurseries to hardware stores</div>
+      </div>
+      <div class="feature-card fade-in" onclick="scrollToSection('book-professional')" id="feat-pro">
+        <span class="feature-card-arrow">↗</span>
+        <div class="feature-card-icon">👷</div>
+        <div class="feature-card-title">Book a Professional</div>
+        <div class="feature-card-desc">Hire verified electricians, plumbers, carpenters, mechanics & more</div>
+      </div>
+      <div class="feature-card fade-in" onclick="scrollToSection('repair-install')" id="feat-repair">
+        <span class="feature-card-arrow">↗</span>
+        <div class="feature-card-icon">🔧</div>
+        <div class="feature-card-title">Repair & Install</div>
+        <div class="feature-card-desc">AC, washing machine, TV, fridge — book a service at your doorstep</div>
+      </div>
+      <div class="feature-card fade-in" onclick="scrollToSection('marketplace')" id="feat-market">
+        <span class="feature-card-arrow">↗</span>
+        <div class="feature-card-icon">🛍️</div>
+        <div class="feature-card-title">Marketplace</div>
+        <div class="feature-card-desc">Order groceries, snacks, dairy & more — delivered in minutes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 1: SHOP NEARBY
+═══════════════════════════════════════════════════════════ -->
+<section id="shop-nearby" class="section" aria-label="Shop Nearby">
+  <div class="container">
+    <div class="section-tag">🏪 Shop Nearby</div>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Find Shops <span class="text-gradient">Near You</span></h2>
+        <p class="section-subtitle">Discover local shops — flower nurseries, pharmacies, bakeries and more</p>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrapper fade-in">
+      <span class="search-icon">🔍</span>
+      <input
+        type="search"
+        id="shop-search"
+        class="search-input"
+        placeholder="Search by shop name, category, or area (e.g. 'nursery', 'bakery')"
+        aria-label="Search shops"
+      />
+    </div>
+
+    <!-- Category Chips -->
+    <div class="category-chips fade-in" id="shop-category-chips" role="group" aria-label="Shop categories"></div>
+
+    <!-- Shop Cards Grid -->
+    <div class="cards-grid" id="shops-grid" role="list"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 2: BOOK A PROFESSIONAL
+═══════════════════════════════════════════════════════════ -->
+<section id="book-professional" class="section" aria-label="Book a Professional">
+  <div class="container">
+    <div class="section-tag">👷 Book a Professional</div>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Hire Verified <span class="text-gradient">Professionals</span></h2>
+        <p class="section-subtitle">Skilled, background-verified professionals for every need at your doorstep</p>
+      </div>
+    </div>
+
+    <!-- Category Chips -->
+    <div class="category-chips fade-in" id="pro-category-chips" role="group" aria-label="Professional categories"></div>
+
+    <!-- Professionals Grid -->
+    <div class="cards-grid" id="pros-grid" role="list"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 3: REPAIR & INSTALL
+═══════════════════════════════════════════════════════════ -->
+<section id="repair-install" class="section" aria-label="Repair and Install">
+  <div class="container">
+    <div class="section-tag">🔧 Repair &amp; Install</div>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Repair &amp; <span class="text-gradient">Installation</span> Services</h2>
+        <p class="section-subtitle">AC, washing machine, TV, geyser — get any appliance fixed or installed at home</p>
+      </div>
+    </div>
+
+    <!-- Category Chips -->
+    <div class="category-chips fade-in" id="repair-category-chips" role="group" aria-label="Repair categories"></div>
+
+    <!-- Repair Services Grid -->
+    <div class="cards-grid" id="repair-grid" role="list"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 4: MARKETPLACE
+═══════════════════════════════════════════════════════════ -->
+<section id="marketplace" class="section" aria-label="Marketplace">
+  <div class="container">
+    <div class="section-tag">🛍️ Marketplace</div>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Order in <span class="text-accent-gradient">Minutes</span></h2>
+        <p class="section-subtitle">Fresh groceries, snacks, dairy, personal care and more — lightning fast delivery</p>
+      </div>
+    </div>
+
+    <!-- Delivery Banner -->
+    <div class="delivery-banner fade-in">
+      <span class="delivery-icon">🛵</span>
+      <div>
+        <div class="delivery-title">Lightning Fast Delivery</div>
+        <div class="delivery-sub">Fresh products delivered straight to your door</div>
+      </div>
+      <div class="delivery-time">
+        <div class="delivery-mins">30</div>
+        <div class="delivery-min-label">min avg</div>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrapper fade-in">
+      <span class="search-icon">🔍</span>
+      <input
+        type="search"
+        id="market-search"
+        class="search-input"
+        placeholder="Search products (e.g. 'milk', 'bananas', 'chips')"
+        aria-label="Search marketplace products"
+      />
+    </div>
+
+    <!-- Category Chips -->
+    <div class="category-chips fade-in" id="market-category-chips" role="group" aria-label="Product categories"></div>
+
+    <!-- Products Grid -->
+    <div class="market-grid" id="market-grid" role="list"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom:0">
+          <div class="nav-logo-icon">🛒</div>
+          <span class="nav-logo-text" style="font-size:1.3rem">ManKart</span>
+        </div>
+        <p class="footer-brand-desc">
+          ManKart is your neighbourhood super-app — connecting you with local shops,
+          verified professionals, repair services, and a fast-delivery marketplace.
+          Built for India, by India.
+        </p>
+        <div class="footer-social">
+          <a class="social-btn" href="#" aria-label="Twitter">𝕏</a>
+          <a class="social-btn" href="#" aria-label="Instagram">📸</a>
+          <a class="social-btn" href="#" aria-label="Facebook">📘</a>
+          <a class="social-btn" href="#" aria-label="LinkedIn">💼</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <div class="footer-links">
+          <span class="footer-link" onclick="scrollToSection('shop-nearby')">Shop Nearby</span>
+          <span class="footer-link" onclick="scrollToSection('book-professional')">Book a Professional</span>
+          <span class="footer-link" onclick="scrollToSection('repair-install')">Repair &amp; Install</span>
+          <span class="footer-link" onclick="scrollToSection('marketplace')">Marketplace</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <span class="footer-link">About Us</span>
+          <span class="footer-link">Careers</span>
+          <span class="footer-link">Partner with Us</span>
+          <span class="footer-link">List Your Shop</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <div class="footer-links">
+          <span class="footer-link">Help Centre</span>
+          <span class="footer-link">Privacy Policy</span>
+          <span class="footer-link">Terms of Service</span>
+          <span class="footer-link">Contact Us</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2024 ManKart. All rights reserved. Made with ❤️ in India.</span>
+      <span class="pwa-badge">📱 Available as Android App</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BOOKING MODAL
+═══════════════════════════════════════════════════════════ -->
+<div id="booking-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Booking form">
+  <div class="modal" id="booking-modal">
+    <!-- Rendered by JS -->
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CART DRAWER
+═══════════════════════════════════════════════════════════ -->
+<div id="cart-overlay" class="cart-overlay" role="dialog" aria-modal="true" aria-label="Shopping cart">
+  <div class="cart-backdrop" id="cart-backdrop"></div>
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <div class="cart-header-title">🛒 Your Cart</div>
+      <button class="cart-close" onclick="closeCart()" aria-label="Close cart">✕</button>
+    </div>
+
+    <div id="cart-empty" class="cart-empty" style="display:flex">
+      <div class="cart-empty-icon">🛒</div>
+      <div>Your cart is empty</div>
+      <div style="font-size:0.8rem;color:var(--text-muted)">Add items from the Marketplace</div>
+    </div>
+
+    <div id="cart-items" class="cart-items"></div>
+
+    <div id="cart-footer" class="cart-footer" style="display:none">
+      <div class="cart-summary" id="cart-summary"></div>
+      <button class="checkout-btn" onclick="showToast('🎉 Checkout coming soon!')">
+        Proceed to Checkout →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TOAST NOTIFICATIONS
+═══════════════════════════════════════════════════════════ -->
+<div id="toast-container" role="status" aria-live="polite"></div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════════ -->
+<script src="js/data.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+  // Set city from hero input
+  function setCity() {
+    const val = document.getElementById('hero-city-input').value.trim();
+    if (val) {
+      document.getElementById('user-city').textContent = val;
+      showToast(`📍 Location set to ${val}`);
+      setTimeout(() => scrollToSection('shop-nearby'), 500);
+    }
+  }
+
+  // Try to get city from geolocation (graceful fallback)
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+          .then(r => r.json())
+          .then(data => {
+            const city = data.address?.city || data.address?.town || data.address?.village || 'Your City';
+            document.getElementById('user-city').textContent = city;
+            document.getElementById('hero-city-input').placeholder = `📍 ${city}`;
+          })
+          .catch(() => {});
+      },
+      () => {},
+      { timeout: 5000 }
+    );
+  }
+</script>
+
+</body>
+</html>
